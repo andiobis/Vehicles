@@ -1,0 +1,73 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext {
+        useCmtMavenBeta = "$System.env.USE_CMT_MAVEN_BETA"
+
+        //Kotlin
+        version_kotlin = '1.8.10'
+        version_kotlin_coroutines = "1.5.2"
+
+        //Gson
+        version_gson = "2.8.8"
+
+        //Retrofit
+        version_retrofit = '2.9.0'
+        version_retrofit_gson_adapter = '2.9.0'
+
+        //Android JetPack and AppCompat
+        version_lifecycle = "2.6.1"
+        version_nav = "2.4.2"
+        version_appcompat = "1.6.1"
+        version_constraint_layout = "2.1.4"
+        version_recyclerview = "1.3.0"
+        version_material = "1.9.0"
+        version_exifinterface = "1.3.6"
+
+        //Koin
+        koin_version = "3.1.3"
+
+        kochava_tracker_version = "5.0.0"
+
+        // Compose
+        version_compose_kotlin_compiler = "1.4.4"
+        version_compose = "1.4.3"
+
+        // Testing
+        version_mockito_android = "2.28.2"
+        version_core_testing = "2.2.0"
+
+        version_core_ktx = "1.7.0"
+
+        version_legacy_support_v4 = "1.0.0"
+
+        paging_version = "3.1.1"
+    }
+
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.2.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$version_kotlin"
+        classpath 'com.google.gms:google-services:4.3.15'
+        classpath 'androidx.navigation:navigation-safe-args-gradle-plugin:2.4.1'
+    }
+
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+

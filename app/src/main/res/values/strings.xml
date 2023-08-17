@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">FleetioVehicles</string>
+    <string name="loading">Loading</string>
+    <string name="vehicle_details">Vehicle Details</string>
+    <string name="vin">VIN</string>
+    <string name="licence_plate">Licence Plate %1$s</string>
+    <string name="vehicle_location">Vehicle Location</string>
+    <string name="retry">Retry</string>
+    <string name="error">Error</string>
+    <string name="unable_to_load">Unable to load at this moment</string>
+</resources>

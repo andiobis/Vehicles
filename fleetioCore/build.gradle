@@ -1,0 +1,84 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.example.fleetiocore'
+    compileSdk 33
+
+    // Load the API keys from local.properties
+    Properties properties = new Properties()
+    if (rootProject.file("local.properties").exists()) {
+        properties.load(rootProject.file("local.properties").newDataInputStream())
+    }
+
+    defaultConfig {
+        minSdk 23
+        targetSdk 33
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            resValue "string", "api_key", "${System.env.API_KEY ?: properties.getProperty("API_KEY", "")}"
+            resValue "string", "user_id", "${System.env.USER_ID ?: properties.getProperty("USER_ID", "")}"
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            resValue "string", "api_key", "${System.env.API_KEY ?: properties.getProperty("API_KEY", "")}"
+            resValue "string", "user_id", "${System.env.USER_ID ?: properties.getProperty("USER_ID", "")}"
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "androidx.appcompat:appcompat:$version_appcompat"
+    implementation "androidx.core:core-ktx:$version_core_ktx"
+
+    //Gson Serialization
+    implementation "com.google.code.gson:gson:$version_gson"
+
+    //Kotlin Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_kotlin_coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_kotlin_coroutines"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$version_lifecycle"
+
+    //Gson
+    implementation "com.squareup.retrofit2:converter-gson:$version_retrofit_gson_adapter"
+
+    //Retrofit2
+    implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
+    implementation "com.squareup.okhttp3:okhttp:4.10.0"
+
+    implementation "io.insert-koin:koin-android:$koin_version"
+
+    //paging
+    api "androidx.paging:paging-runtime:$paging_version"
+    testApi "androidx.paging:paging-common:$paging_version"
+    api "androidx.paging:paging-compose:3.2.0"
+
+    testImplementation "androidx.arch.core:core-testing:$version_core_testing"
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}
